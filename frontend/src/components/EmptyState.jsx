@@ -1,12 +1,15 @@
-/* Typography-led empty state — no large illustrations */
 const EmptyState = ({
+  icon = '',
   eyebrow = '',
-  title = 'NOTHING HERE',
+  title = 'Nothing here yet',
   description = '',
   children,
 }) => {
   return (
     <div className="empty-state" role="status">
+      {icon && (
+        <div className="empty-state-icon" aria-hidden="true">{icon}</div>
+      )}
       {eyebrow && (
         <p className="empty-state-eyebrow">{eyebrow}</p>
       )}

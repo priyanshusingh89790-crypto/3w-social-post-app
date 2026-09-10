@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { getPostsApi } from '../services/api';
-import { Sidebar, BottomNav, TopBar } from '../components/Navbar';
+import { AppHeader, BottomNav } from '../components/Navbar';
 import CreatePost from '../components/CreatePost';
 import PostCard from '../components/PostCard';
 import Loading from '../components/Loading';
@@ -57,23 +57,32 @@ const Feed = () => {
 
   return (
     <div className="app-shell">
-      {/* Desktop sidebar */}
-      <Sidebar />
-
-      {/* Tablet top bar */}
-      <TopBar />
+      {/* Blue top header */}
+      <AppHeader />
 
       {/* Main content */}
       <main className="app-main" id="main-content">
         <div className="feed-column">
+
+          {/* Feed heading */}
+          <div className="feed-heading-row">
+            <div>
+              <h1 className="feed-heading">Social</h1>
+              <p className="feed-heading-sub">Share with the community</p>
+            </div>
+          </div>
+
+          {/* Composer */}
           <CreatePost onPostCreated={handlePostCreated} />
 
+          {/* Posts */}
           {loadingFeed ? (
             <Loading skeleton />
           ) : error ? (
             <EmptyState
+              icon="⚠️"
               eyebrow="Error"
-              title="COULD NOT LOAD POSTS"
+              title="Could not load posts"
               description={error}
             >
               <button
@@ -85,9 +94,10 @@ const Feed = () => {
             </EmptyState>
           ) : posts.length === 0 ? (
             <EmptyState
+              icon="📭"
               eyebrow="No posts yet"
-              title="NOTHING HAS BEEN SHARED"
-              description="Be the first to publish something worth reading."
+              title="Nothing has been shared"
+              description="Be the first to publish something for the community!"
             />
           ) : (
             <>
@@ -124,7 +134,7 @@ const Feed = () => {
         </div>
       </main>
 
-      {/* Mobile bottom nav */}
+      {/* Blue bottom nav — mobile */}
       <BottomNav />
     </div>
   );

@@ -1,61 +1,92 @@
 /* ============================================================
-   MIDNIGHT EDITORIAL — Design Tokens & Global Reset
-   All raw values live here. Components reference tokens only.
+   3W SOCIAL — TaskPlanet-inspired Light Theme
+   Design tokens. All components reference these only.
    ============================================================ */
 
 :root {
-  /* — Color — */
-  --bg:            #0B0B0D;
-  --surface:       #151517;
-  --surface-hover: #1C1C1F;
-  --border:        #2A2A2E;
-  --text-primary:  #F5F2EA;
-  --text-secondary:#9A9A9F;
-  --accent:        #D9FF4B;
-  --danger:        #E5484D;
-  --success:       #3DD68C;
+  /* — Core palette — */
+  --bg:            #F2F4F7;       /* light gray page background */
+  --surface:       #FFFFFF;       /* white cards */
+  --surface-2:     #F8F9FB;       /* very light inner surfaces */
+  --surface-hover: #EEF0F5;
+  --border:        #E4E8EF;
+  --border-focus:  #2563EB;
 
-  /* — Avatar palette (deterministic by letter) — */
-  --av-a: #6E56CF;
-  --av-b: #3B82F6;
-  --av-c: #EC4899;
-  --av-d: #F59E0B;
-  --av-e: #10B981;
-  --av-f: #8B5CF6;
-  --av-g: #EF4444;
-  --av-h: #06B6D4;
-  --av-i: #84CC16;
-  --av-j: #F97316;
-  --av-k: #14B8A6;
-  --av-l: #A855F7;
-  --av-m: #6366F1;
-  --av-n: #D946EF;
-  --av-o: #0EA5E9;
-  --av-default: #9A9A9F;
+  /* — Brand colors — */
+  --primary:       #2563EB;       /* TaskPlanet-style blue */
+  --primary-dark:  #1D4ED8;
+  --primary-light: #EFF4FF;       /* blue tint for active backgrounds */
+  --purple:        #7C3AED;       /* accent purple */
+  --purple-light:  #F3EEFF;
+  --orange:        #F97316;       /* accent orange */
+  --orange-light:  #FFF4ED;
+  --yellow:        #F59E0B;
+
+  /* — Semantic — */
+  --danger:        #DC2626;
+  --danger-light:  #FEF2F2;
+  --success:       #16A34A;
+  --success-light: #F0FDF4;
+
+  /* — Text — */
+  --text-primary:   #111827;
+  --text-secondary: #6B7280;
+  --text-muted:     #9CA3AF;
+  --text-on-primary:#FFFFFF;
+
+  /* — Avatar palette — */
+  --av-a: #7C3AED;
+  --av-b: #2563EB;
+  --av-c: #DB2777;
+  --av-d: #D97706;
+  --av-e: #059669;
+  --av-f: #9333EA;
+  --av-g: #DC2626;
+  --av-h: #0891B2;
+  --av-i: #65A30D;
+  --av-j: #EA580C;
+  --av-k: #0D9488;
+  --av-l: #C026D3;
+  --av-m: #4F46E5;
+  --av-n: #BE185D;
+  --av-o: #0284C7;
+  --av-default: #6B7280;
 
   /* — Typography — */
   --font: 'Manrope', system-ui, sans-serif;
 
-  /* — Spacing (8px scale) — */
+  /* — Spacing — */
   --sp-1:  4px;
   --sp-2:  8px;
   --sp-3:  12px;
   --sp-4:  16px;
+  --sp-5:  20px;
   --sp-6:  24px;
   --sp-8:  32px;
+  --sp-10: 40px;
   --sp-12: 48px;
   --sp-16: 64px;
 
-  /* — Radius (exactly two) — */
-  --r-sm: 8px;
-  --r-lg: 16px;
+  /* — Radius — */
+  --r-sm:   8px;
+  --r-md:   12px;
+  --r-lg:   16px;
+  --r-xl:   20px;
+  --r-pill: 999px;
+
+  /* — Shadow — */
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -1px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
 
   /* — Motion — */
-  --ease: 200ms ease-out;
+  --ease: 180ms ease-out;
 
   /* — Layout — */
-  --sidebar-w: 240px;
-  --feed-max:  600px;
+  --header-h: 60px;
+  --bottom-nav-h: 64px;
+  --feed-max: 600px;
 }
 
 /* ===== Reset ===== */
@@ -76,7 +107,7 @@ body {
   font-family: var(--font);
   background: var(--bg);
   color: var(--text-primary);
-  line-height: 1.6;
+  line-height: 1.5;
   min-height: 100vh;
 }
 
@@ -99,22 +130,16 @@ input, textarea {
   outline: none;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
+a { text-decoration: none; color: inherit; }
+ul, ol { list-style: none; }
 
-ul, ol {
-  list-style: none;
-}
-
-/* ===== Focus ring (accessible) ===== */
+/* ===== Focus ring ===== */
 :focus-visible {
-  outline: 2px solid var(--accent);
+  outline: 2px solid var(--primary);
   outline-offset: 2px;
 }
 
-/* ===== Screen reader only ===== */
+/* ===== Utilities ===== */
 .sr-only {
   position: absolute;
   width: 1px;
@@ -125,15 +150,13 @@ ul, ol {
 }
 
 /* ===== Spinner ===== */
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
 .spinner {
-  width: 32px;
-  height: 32px;
-  border: 2px solid var(--border);
-  border-top-color: var(--accent);
+  width: 28px;
+  height: 28px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--primary);
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
   flex-shrink: 0;
@@ -143,6 +166,11 @@ ul, ol {
   width: 16px;
   height: 16px;
   border-width: 2px;
+}
+
+.spinner--white {
+  border-color: rgba(255,255,255,0.35);
+  border-top-color: #fff;
 }
 
 .spinner-wrapper {
@@ -159,28 +187,14 @@ ul, ol {
 }
 
 .skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--surface) 25%,
-    var(--surface-hover) 50%,
-    var(--surface) 75%
-  );
+  background: linear-gradient(90deg, #F0F2F5 25%, #E8EBF0 50%, #F0F2F5 75%);
   background-size: 600px 100%;
   animation: shimmer 1.4s infinite linear;
   border-radius: var(--r-sm);
 }
 
-/* ===== Scrollbar (Webkit) ===== */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg);
-}
-::-webkit-scrollbar-thumb {
-  background: var(--border);
-  border-radius: 99px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-secondary);
-}
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }

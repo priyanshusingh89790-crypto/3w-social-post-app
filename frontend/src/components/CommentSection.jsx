@@ -72,15 +72,17 @@ const CommentSection = ({ postId, comments, onPostUpdate }) => {
                 {initial(comment.user?.username)}
               </div>
               <div className="comment-body">
-                <div className="comment-header">
-                  <span className="comment-username">
-                    {comment.user?.username || 'Unknown'}
-                  </span>
-                  <time className="comment-time" dateTime={comment.createdAt}>
-                    {formatRelativeTime(comment.createdAt)}
-                  </time>
+                <div className="comment-bubble">
+                  <div className="comment-header">
+                    <span className="comment-username">
+                      {comment.user?.username || 'Unknown'}
+                    </span>
+                    <time className="comment-time" dateTime={comment.createdAt}>
+                      {formatRelativeTime(comment.createdAt)}
+                    </time>
+                  </div>
+                  <p className="comment-text">{comment.text}</p>
                 </div>
-                <p className="comment-text">{comment.text}</p>
               </div>
             </li>
           ))}

@@ -103,8 +103,7 @@ const PostCard = ({ post, onPostUpdate, onPostDelete }) => {
             {post.likeCount > 0 && <span>{likeLabel}</span>}
             {post.commentCount > 0 && (
               <button
-                className="show-more-comments"
-                style={{ margin: 0, padding: 0, fontSize: '13px' }}
+                className="post-count-btn"
                 onClick={() => setShowComments((v) => !v)}
                 aria-expanded={showComments}
               >

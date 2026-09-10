@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { AlertCircle, Eye, EyeOff } from 'lucide-react';
+import { AlertCircle, Eye, EyeOff, Mail, Lock } from 'lucide-react';
 import '../styles/auth.css';
 
 const Login = () => {
@@ -39,108 +39,79 @@ const Login = () => {
 
   return (
     <main className="auth-page">
-      {/* Left — editorial brand panel */}
-      <div className="auth-brand-panel" aria-hidden="true">
-        <div className="auth-brand-logo">
-          <div className="auth-brand-3w">3W</div>
-          <div className="auth-brand-social">Social</div>
+      <div className="auth-card">
+        {/* Header */}
+        <div className="auth-header">
+          <div className="auth-logo" aria-hidden="true">
+            <span className="auth-logo-text">3W</span>
+          </div>
+          <h1 className="auth-brand-name">3W Social</h1>
+          <p className="auth-brand-sub">Sign in to your account</p>
         </div>
 
-        <div className="auth-brand-statement">
-          <h2 className="auth-brand-heading">
-            Share what&apos;s<br />
-            <em>worth sharing.</em>
-          </h2>
-          <p className="auth-brand-subtext">
-            A minimal space for people who have something to say.
-            No noise. Just words and images that matter.
-          </p>
-        </div>
+        <form className="auth-form" onSubmit={handleSubmit} noValidate>
+          {error && (
+            <div className="auth-error" role="alert">
+              <AlertCircle size={15} strokeWidth={2} aria-hidden="true" />
+              {error}
+            </div>
+          )}
 
-        <p className="auth-brand-footer">3W Social · {new Date().getFullYear()}</p>
-      </div>
-
-      {/* Right — form */}
-      <div className="auth-form-panel">
-        <div className="auth-form-inner">
-          {/* Mobile brand (hidden on desktop via CSS) */}
-          <div className="auth-mobile-brand">
-            <div className="auth-brand-3w">3W</div>
-            <div className="auth-brand-social">Social</div>
+          <div className="form-group">
+            <label htmlFor="email">Email address</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="you@example.com"
+              disabled={loading}
+              autoComplete="email"
+              required
+            />
           </div>
 
-          <h1 className="auth-form-heading">Welcome back</h1>
-          <p className="auth-form-sub">Sign in to continue</p>
-
-          <form className="auth-form" onSubmit={handleSubmit} noValidate>
-            {error && (
-              <div className="auth-error" role="alert">
-                <AlertCircle size={14} strokeWidth={2} aria-hidden="true" />
-                {error}
-              </div>
-            )}
-
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <div className="input-password-wrap">
               <input
-                type="email"
-                id="email"
-                name="email"
-                value={form.email}
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                name="password"
+                value={form.password}
                 onChange={handleChange}
-                placeholder="you@example.com"
+                placeholder="Your password"
                 disabled={loading}
-                autoComplete="email"
+                autoComplete="current-password"
                 required
               />
+              <button
+                type="button"
+                className="btn-eye"
+                onClick={() => setShowPassword((v) => !v)}
+                aria-label={showPassword ? 'Hide password' : 'Show password'}
+              >
+                {showPassword
+                  ? <EyeOff size={17} strokeWidth={1.75} aria-hidden="true" />
+                  : <Eye size={17} strokeWidth={1.75} aria-hidden="true" />}
+              </button>
             </div>
+          </div>
 
-            <div className="form-group">
-              <label htmlFor="password">Password</label>
-              <div className="input-password-wrap">
-                <input
-                  type={showPassword ? 'text' : 'password'}
-                  id="password"
-                  name="password"
-                  value={form.password}
-                  onChange={handleChange}
-                  placeholder="Your password"
-                  disabled={loading}
-                  autoComplete="current-password"
-                  required
-                />
-                <button
-                  type="button"
-                  className="btn-eye"
-                  onClick={() => setShowPassword((v) => !v)}
-                  aria-label={showPassword ? 'Hide password' : 'Show password'}
-                  tabIndex={0}
-                >
-                  {showPassword
-                    ? <EyeOff size={16} strokeWidth={1.75} aria-hidden="true" />
-                    : <Eye size={16} strokeWidth={1.75} aria-hidden="true" />}
-                </button>
-              </div>
-            </div>
+          <button type="submit" className="btn-primary" disabled={loading}>
+            {loading ? (
+              <div className="spinner spinner--sm spinner--white" aria-hidden="true" />
+            ) : (
+              'Sign In'
+            )}
+          </button>
+        </form>
 
-            <button
-              type="submit"
-              className="btn-primary"
-              disabled={loading}
-            >
-              {loading ? (
-                <div className="spinner spinner--sm" aria-hidden="true" />
-              ) : (
-                'Sign In'
-              )}
-            </button>
-          </form>
-
-          <p className="auth-footer-link">
-            Don&apos;t have an account?{' '}
-            <Link to="/signup">Create one</Link>
-          </p>
-        </div>
+        <p className="auth-footer-link">
+          Don&apos;t have an account?{' '}
+          <Link to="/signup">Create one</Link>
+        </p>
       </div>
     </main>
   );

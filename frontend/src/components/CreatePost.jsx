@@ -88,14 +88,14 @@ const CreatePost = ({ onPostCreated }) => {
             {initial}
           </div>
 
-          <div style={{ flex: 1 }}>
+          <div className="composer-input-wrap">
             <label htmlFor="post-text" className="sr-only">
-              Write something worth sharing
+              What&apos;s on your mind?
             </label>
             <textarea
               id="post-text"
               className="composer-textarea"
-              placeholder={`Write something worth sharing…`}
+              placeholder="What's on your mind?"
               value={text}
               onChange={(e) => setText(e.target.value)}
               disabled={submitting}
@@ -107,7 +107,7 @@ const CreatePost = ({ onPostCreated }) => {
 
         {/* Image preview */}
         {preview && (
-          <div className="composer-preview">
+          <div className="composer-preview" style={{ marginLeft: 0 }}>
             <img src={preview} alt="Selected image preview" />
             <button
               type="button"

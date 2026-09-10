@@ -158,7 +158,7 @@ const EditPostDialog = ({ post, onClose, onPostUpdate }) => {
                 style={{
                   display: 'block',
                   fontSize: '13px',
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: 'var(--text-primary)',
                   marginBottom: 'var(--sp-2)',
                   letterSpacing: '0.01em',
@@ -225,7 +225,7 @@ const EditPostDialog = ({ post, onClose, onPostUpdate }) => {
                     onClick={handleRestoreExisting}
                     disabled={submitting}
                     style={{
-                      color: 'var(--accent)',
+                      color: 'var(--primary)',
                       fontWeight: 600,
                       fontSize: '13px',
                       background: 'none',
