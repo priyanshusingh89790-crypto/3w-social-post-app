@@ -1,0 +1,186 @@
+/* ============================================================
+   MIDNIGHT EDITORIAL — Design Tokens & Global Reset
+   All raw values live here. Components reference tokens only.
+   ============================================================ */
+
+:root {
+  /* — Color — */
+  --bg:            #0B0B0D;
+  --surface:       #151517;
+  --surface-hover: #1C1C1F;
+  --border:        #2A2A2E;
+  --text-primary:  #F5F2EA;
+  --text-secondary:#9A9A9F;
+  --accent:        #D9FF4B;
+  --danger:        #E5484D;
+  --success:       #3DD68C;
+
+  /* — Avatar palette (deterministic by letter) — */
+  --av-a: #6E56CF;
+  --av-b: #3B82F6;
+  --av-c: #EC4899;
+  --av-d: #F59E0B;
+  --av-e: #10B981;
+  --av-f: #8B5CF6;
+  --av-g: #EF4444;
+  --av-h: #06B6D4;
+  --av-i: #84CC16;
+  --av-j: #F97316;
+  --av-k: #14B8A6;
+  --av-l: #A855F7;
+  --av-m: #6366F1;
+  --av-n: #D946EF;
+  --av-o: #0EA5E9;
+  --av-default: #9A9A9F;
+
+  /* — Typography — */
+  --font: 'Manrope', system-ui, sans-serif;
+
+  /* — Spacing (8px scale) — */
+  --sp-1:  4px;
+  --sp-2:  8px;
+  --sp-3:  12px;
+  --sp-4:  16px;
+  --sp-6:  24px;
+  --sp-8:  32px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* — Radius (exactly two) — */
+  --r-sm: 8px;
+  --r-lg: 16px;
+
+  /* — Motion — */
+  --ease: 200ms ease-out;
+
+  /* — Layout — */
+  --sidebar-w: 240px;
+  --feed-max:  600px;
+}
+
+/* ===== Reset ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font-family: var(--font);
+  cursor: pointer;
+  border: none;
+  background: none;
+  outline: none;
+}
+
+input, textarea {
+  font-family: var(--font);
+  outline: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+ul, ol {
+  list-style: none;
+}
+
+/* ===== Focus ring (accessible) ===== */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* ===== Screen reader only ===== */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ===== Spinner ===== */
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+.spinner--sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.spinner-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-12) var(--sp-4);
+}
+
+/* ===== Skeleton shimmer ===== */
+@keyframes shimmer {
+  0%   { background-position: -600px 0; }
+  100% { background-position:  600px 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--surface) 25%,
+    var(--surface-hover) 50%,
+    var(--surface) 75%
+  );
+  background-size: 600px 100%;
+  animation: shimmer 1.4s infinite linear;
+  border-radius: var(--r-sm);
+}
+
+/* ===== Scrollbar (Webkit) ===== */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 99px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
